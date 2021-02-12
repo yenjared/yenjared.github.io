@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project 1 Focus on Position and Navigation on the Web</title>
+<link rel="stylesheet" href="main.css">
+</style>
+
+<script
+src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSp6JQiKoe84kUZIeTztM4ZDNyoVlaSTI&callback=initMap&libraries=&v=weekly"defer>
+</script>
+
+<style type="text/css">
+ html,
+ body, #map {
+ height: 90%;
+ margin: 0;
+ padding: 0;
+ }
+ </style>
+
+<h1>Sustainable Development Goals 3: Good Health and Well Being</h1>
+
+<h2>Introduction</h2>
+
+<p>This web app is a hospital and health resource tracker that supports the third goal of sustainable development goal.</p>
+<p>This goal supports that a healthy life should be accessible for everyone and pushes this through universal free health care with hospital aid and other resources.</p>
+<p>The first step to this goal is to have people informed on the resources available to them.</p>
+<p>This app is created by Geomatics Engineering students at York University so our origin will be at York University.</p>
+<p>It is common that students develop mental stress and avoid it to stay focused on school even though it's the probable cause for stress.</p>
+<p>The University pushes how crucial mental health is for students through emails, posters, and ads across campus.</p>
+<p>York also provides their own health services and workshops to develop skills for school.</p>
+<p>But for the people outside of York University or commuters that need to leave campus as soon as possible, we've created a web app that can help relocate them to nearby health resources across Toronto.</p>
+<p>The web app can be delivered the same way the resources are spread to students.</p>
+<p>Links to the website via email as well as having our web app on touch screen surfaces that can be found in public such as malls.</p>
+
+<img src="goal3.png" alt="alternative" style="width:800px">
+
+</body>
+
+<h2>How it works</h2>
+
+<p>The origin will be initially be York University with the end point being a health resource from dataset.</p>
+<p>The map will display a line of how to get to the end point.</p>
+<p>Our datalist consists of addresses of health resources spanning from hospitals, health and mental services.</p>
+<p>We found these locations through google searches of these topics and obtaining the latitude and longitudes of the locations within Toronto.</p>
+<p>After obtaining our data, we created an html web application as a test to see how it would work.</p>
+<p>Using Google Map API, we used the Maps JavaScript API as well as Google Direction API to define our map and the directions from our origin to end points.</p>
+
+<h2>Purpose</h2>
+
+<p>Users will have a map and direction to a health resource that would be applicable to their needs.</p>
+<p>Defining the path they need to take, users can find health professionals to diagnose their symptoms and be guided through rehabilitation.</p>
+<p>It's not common knowledge of the free health resources provided by the government.</p>
+<p>If we connected information from ads and PSAs to a direction people can connect their idea to a location and give them clear directions to help themselves.</p>
+<p>Many places across the world don't have access to universal health care. Citizens of Canada are fortunate to have it, but still many don't acknowledge it.</p>
+<p>If we develop technology that makes ourhealth care system more efficient, we believe health care will branch out and make things more affordable and truly raise the quality of life and lifespan.</p>
+<p>Perfecting this technology within our borders with the mindset to reach internationally because everyone should have a right to live and to have a good and healthy life.</p>
+<p>From this project, we learned to be a bit more caring and human as we're to think about ourselves and others.</p>
+<p>Putting ourselves in different peoples shoes to understand that everyone's situation is different and to account for everyone because the goal is to have everyone healthy.</p>
+<p>It's an introductory project, but we can see ourselves developing this more into a more advanced system.</p>
+<p>This web app just shows the direction, which is the first step.</p>
+<p>We think the next step is to make health care systems more efficient with navigation through the hospital and alleviate the work on healt care workers.</p>
+<p>Similarily to the population of Geomatics Engineers, there is not an abundance of health practitioners and they are often overburdened.</p>
+<p>Hopefully, we can develop more into this technology to help make the health care system more efficient so that more people can be helped.</p>
+
+<script>
+ function initMap() {
+ const directionsService = new google.maps.DirectionsService(); <!-- constants for our direction service because we dont want it to change -->
+ const directionsRenderer = new google.maps.DirectionsRenderer();
+ const map = new google.maps.Map(document.getElementById("map"), {
+ zoom: 10,
+ center: { lat: 43.7742762, lng: -79.5041315 },
+ });
+ directionsRenderer.setMap(map);  <!-- creates map -->
+ onChangeHandler = function () {
+ calculateAndDisplayRoute(directionsService, directionsRenderer);
+ };
+ document <!-- Defines our start and end points -->
+ .getElementById("start")
+ .addEventListener("change", onChangeHandler);
+ document
+ .getElementById("end")
+ .addEventListener("change", onChangeHandler);
+ }
+ function calculateAndDisplayRoute(directionsService,
+directionsRenderer) {
+ directionsService.route(
+ {
+ origin: { <!-- Creates a value for start and end which will be replaced by our 3 locations -->
+ query: document.getElementById("start").value,
+ },
+ destination: {
+ query: document.getElementById("end").value,
+ },
+ travelMode: google.maps.TravelMode.DRIVING,
+ },
+ (response, status) => {
+ if (status === "OK") {
+ directionsRenderer.setDirections(response);
+ } else {
+ window.alert("Directions request failed due to " + status);
+ }
+ }
+ );
+ }
+ </script>
+
+</head>
+
+<body>
+
+<div>
+ <b>Start: </b>
+ <select id="start">
+ <option value="m3j1p3">York University</option>
+ </select>
+ <b>End: </b>
+ <select id="end">
+ <option value="m3j1p3">York University</option>
+ <option value="43.73226654425797, -79.59897526150186">William Osler Health System-Etobicoke General Hospital</option>
+ <option value="43.7296852816381, -79.43321727373664">Baycrest Hospital</option>
+<option value="43.71977013037988, -79.366202044901">Bellwood Health Services</option>
+<option value="43.66585189442133, -79.35524884490304">Bridgepoint Active Healthcare</option>
+<option value="43.643936945329735, -79.41860109372669">Centre for Addiction and Mental Health</option>
+<option value="43.71822747258818, -79.3742018602451">Holland Bloorview Kids Rehabilitation Hospital</option>
+<option value="43.65749364540909, -79.38734681791941">The Hospital for Sick Children</option>
+<option value="43.724318962188015, -79.48816203140888">Humber River Hospital</option>
+<option value="43.69010859472859, -79.32488013141014">Michael Garron Hospital</option>
+<option value="43.65754843472695, -79.39032717373934">Mount Sinai Hospital</option>
+<option value="43.769274974832534, -79.36276556024322">North York General Hospital</option>
+<option value="43.77199765592252, -79.44740487558701">Branson Ambulatory Care Centre</option>
+<option value="43.65832683301633, -79.39060403141133">Princess Margaret Cancer Centre</option>
+<option value="43.712900681012094, -79.28482475322885">Providence Healthcare</option>
+<option value="43.61897856773874, -79.562140953461">Queensway Health Centre</option>
+<option value="43.78140913867722, -79.20416146024266">Centenary Hospital Loop</option>
+<option value="43.66496408531142, -79.48108977373913">Runnymede Healthcare Centre</option>
+<option value="43.7564111525901, -79.24688232037198">Scarborough Health Network</option>
+<option value="43.80198072077702, -79.30842930256992">Birchmount Hospital Pharmacy</option>
+<option value="43.64045115074439, -79.45003224490401">St.Joseph's Health Centre</option>
+<option value="43.65380958107015, -79.3778132449035">St.Michael's Hospital</option>
+<option value="43.72273949654641, -79.37563796024492">Sunnybrook Health Sciences Centre</option>
+<option value="43.787673584210374, -79.40402474675047">St.John's Rehab Centre</option>
+<option value="43.65924018800613, -79.38838006024731">Toronto General Hospital</option>
+<option value="43.65677229630077, -79.39004517373941">Toronto Rehabilitation Institute</option>
+<option value="43.63499750444549, -79.43270940257624">Bickle Centre for Complex Continuing Care</option>
+<option value="43.63681144507377, -79.4333238449042">Lakeside Long Term Care Centre</option>
+<option value="43.71869470866557, -79.37157146024504">Toronto Rehab Institute and Rumsey Centre Cardiac Rehab Institute</option>
+
+ </select>
+</div>
+ <div id="map"></div>
+
+
+</body>
+
+</html>
